@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://attandance-smart-backend.vercel.app/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
