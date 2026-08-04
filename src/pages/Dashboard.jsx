@@ -3,6 +3,7 @@ import { AuthContext } from "../context/AuthContext";
 import { axiosInstance } from "../api/axios";
 import {
   Row, Col, Card, Statistic, Progress, Typography, Spin, Tag,
+  Grid,
 } from "antd";
 import {
   TeamOutlined, CheckCircleOutlined, CloseCircleOutlined, ClockCircleOutlined,
@@ -10,9 +11,12 @@ import {
 } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
 
 export default function Dashboard() {
   const { token } = useContext(AuthContext);
+  const screens = useBreakpoint();
+  const isMobile = screens.md === false;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -68,14 +72,14 @@ export default function Dashboard() {
 
       {/* Attendance rate card */}
       <Card style={{ marginBottom: 16, borderRadius: 10 }} styles={{ body: { padding: 24 } }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: isMobile ? 16 : 32, flexWrap: "wrap" }}>
           <Progress
             type="circle"
             percent={rate}
-            size={100}
+            size={isMobile ? 80 : 100}
             strokeColor={rate >= 90 ? "#22c55e" : rate >= 75 ? "#f59e0b" : "#ef4444"}
           />
-          <div>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <Text type="secondary" style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: 1 }}>Attendance Rate</Text>
             <div style={{ marginTop: 4 }}>
               <Text strong style={{ fontSize: 15, color: rate >= 90 ? "#16a34a" : rate >= 75 ? "#d97706" : "#dc2626" }}>
@@ -131,7 +135,7 @@ export default function Dashboard() {
             return (
               <Card key={c.classId} style={{ borderRadius: 10 }} styles={{ body: { padding: 16 } }}>
                 {/* Header */}
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, gap: 8, flexWrap: "wrap" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <Tag color={pct >= 90 ? "success" : pct >= 75 ? "warning" : "error"}>{pct}%</Tag>
                     <span style={{ fontWeight: 600, fontSize: 14 }}>{c.className}</span>

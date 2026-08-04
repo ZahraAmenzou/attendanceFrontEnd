@@ -83,7 +83,7 @@ export default function Teachers() {
 
   return (
     <div style={{ maxWidth: 720, margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, gap: 12, flexWrap: "wrap" }}>
         <div>
           <Title level={4} style={{ margin: 0 }}>Teachers</Title>
           <Text type="secondary">{teachers.length} registered</Text>
@@ -94,11 +94,11 @@ export default function Teachers() {
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {teachers.map((t) => (
           <Card key={t._id} style={{ borderRadius: 10 }} hoverable>
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
               <Avatar size={44} style={{ background: "#eef2ff", color: "#4f46e5", fontWeight: 600, flexShrink: 0 }}>
                 {initials(t.name)}
               </Avatar>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <Text strong style={{ fontSize: 15 }}>{t.name}</Text>
                 <br />
                 <Text type="secondary" style={{ fontSize: 13 }}>

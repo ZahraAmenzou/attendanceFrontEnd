@@ -126,7 +126,7 @@ export default function AssignSubjects() {
 
   return (
     <div style={{ maxWidth: 800, margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, gap: 12, flexWrap: "wrap" }}>
         <div>
           <Title level={4} style={{ margin: 0 }}>Assign Subjects to Teachers</Title>
           <Text type="secondary">{assignments.length} assignments</Text>
@@ -147,7 +147,7 @@ export default function AssignSubjects() {
             <Collapse ghost size="small" items={Object.entries(classMap).map(([cid, { class: cls, items }]) => ({
               key: cid,
               label: (
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", gap: 8, flexWrap: "wrap" }}>
                   <Space>
                     <BankOutlined style={{ color: "#4f46e5" }} />
                     <Text>{cls?.name || "Unknown"}</Text>

@@ -220,8 +220,8 @@ export default function Attendance() {
               const activeText = statuses[s._id] === "absent" ? "#dc2626" : statuses[s._id] === "late" ? "#d97706" : "#16a34a";
               return (
                 <Card key={s._id} style={{ borderRadius: 10, background: activeColor }} hoverable>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
                       <div style={{
                         width: 36, height: 36, borderRadius: "50%",
                         background: activeText, opacity: 0.9,
@@ -230,14 +230,14 @@ export default function Attendance() {
                       }}>
                         {`${s.firstName?.[0] || ""}${s.lastName?.[0] || ""}`.toUpperCase()}
                       </div>
-                      <div>
+                      <div style={{ minWidth: 0 }}>
                         <Text strong style={{ fontSize: 14 }}>{s.firstName} {s.lastName}</Text>
                         {s.discipline < 10 && (
                           <><br /><Text type="danger" style={{ fontSize: 11 }}><ExclamationCircleOutlined /> Low discipline</Text></>
                         )}
                       </div>
                     </div>
-                    <Space>
+                    <Space wrap>
                       {statusTag(s._id, "present", "Present", <CheckOutlined />, "#16a34a")}
                       {statusTag(s._id, "late", "Late", <ClockCircleOutlined />, "#d97706")}
                       {statusTag(s._id, "absent", "Absent", <CloseOutlined />, "#dc2626")}

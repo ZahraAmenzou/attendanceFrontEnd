@@ -1,11 +1,12 @@
 import { useEffect, useState, useContext, useMemo } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { axiosInstance } from "../api/axios";
-import { Card, Typography, Tag, DatePicker, Select, Spin, Empty, Space } from "antd";
+import { Card, Typography, Tag, DatePicker, Select, Spin, Empty, Space, Grid } from "antd";
 import { FilterOutlined, TeamOutlined, BookOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 
 const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
 
 const statusConfig = {
   present: { color: "green", label: "Present" },
@@ -17,6 +18,8 @@ const initials = (f = "", l = "") => `${f[0] || ""}${l[0] || ""}`.toUpperCase();
 
 export default function AttendanceHistory() {
   const { token } = useContext(AuthContext);
+  const screens = useBreakpoint();
+  const isMobile = screens.md === false;
   const [classes, setClasses] = useState([]);
   const [students, setStudents] = useState([]);
   const [records, setRecords] = useState([]);
@@ -88,7 +91,7 @@ export default function AttendanceHistory() {
       </div>
 
       {filteredRecords.length > 0 && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 16 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: 12, marginBottom: 16 }}>
           {[
             { label: "Total", val: stats.total, color: "#1f2937" },
             { label: "Present", val: stats.present, color: "#16a34a" },
@@ -145,7 +148,7 @@ export default function AttendanceHistory() {
 
             return (
               <Card key={cls._id} style={{ borderRadius: 10 }} title={
-                <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
                   <TeamOutlined style={{ color: "#4f46e5" }} />
                   <span style={{ fontWeight: 600 }}>{cls.name}</span>
                   <div style={{ marginLeft: "auto" }}>

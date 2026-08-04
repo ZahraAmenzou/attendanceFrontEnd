@@ -100,7 +100,7 @@ export default function Classes() {
 
   return (
     <div style={{ maxWidth: 720, margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, gap: 12, flexWrap: "wrap" }}>
         <div>
           <Title level={4} style={{ margin: 0 }}>Classes</Title>
           <Text type="secondary">{classes.length} classes</Text>
@@ -111,7 +111,7 @@ export default function Classes() {
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {classes.map((c) => (
           <Card key={c._id} style={{ borderRadius: 10 }} hoverable>
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
               <div style={{
                 width: 44, height: 44, borderRadius: 10,
                 background: "#eef2ff", display: "flex", alignItems: "center", justifyContent: "center",
@@ -119,7 +119,7 @@ export default function Classes() {
               }}>
                 <BankOutlined style={{ color: "#4f46e5", fontSize: 18 }} />
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <Text strong style={{ fontSize: 15 }}>{c.name}</Text>
               </div>
               <Space>

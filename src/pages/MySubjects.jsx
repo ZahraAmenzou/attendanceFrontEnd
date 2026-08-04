@@ -44,7 +44,7 @@ export default function MySubjects() {
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {groups.map((g) => (
             <Card key={g.class?._id || "unknown"} style={{ borderRadius: 10 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
                 <BankOutlined style={{ color: "#4f46e5" }} />
                 <Text strong style={{ fontSize: 15 }}>{g.class?.name || "Unknown"}</Text>
                 <Tag>{g.subjects?.length || 0} subject{(g.subjects?.length || 0) > 1 ? "s" : ""}</Tag>

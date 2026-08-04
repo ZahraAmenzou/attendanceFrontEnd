@@ -37,7 +37,7 @@ export default function Login() {
       }}
     >
       <Card
-        style={{ width: 400, borderRadius: 12, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}
+        style={{ width: "100%", maxWidth: 400, margin: "0 16px", borderRadius: 12, boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}
         styles={{ body: { padding: 32 } }}
       >
         <div style={{ textAlign: "center", marginBottom: 32 }}>

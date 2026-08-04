@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { axiosInstance } from "../api/axios";
 import {
-  Card, Table, Button, Tag, Typography, Modal, Form, Input, Select, message, Space,
+  Card, Table, Button, Tag, Typography, Modal, Form, Input, Select, message, Space, Grid,
 } from "antd";
 import {
   PlusOutlined, EditOutlined, DeleteOutlined, SearchOutlined,
@@ -11,9 +11,12 @@ import {
 } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
+const { useBreakpoint } = Grid;
 
 export default function Students() {
   const { token } = useContext(AuthContext);
+  const screens = useBreakpoint();
+  const isMobile = screens.md === false;
   const [students, setStudents] = useState([]);
   const [classes, setClasses] = useState([]);
   const [teachers, setTeachers] = useState([]);
@@ -220,23 +223,23 @@ export default function Students() {
 
   return (
     <div style={{ maxWidth: 960, margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, gap: 12, flexWrap: "wrap" }}>
         <div>
           <Title level={4} style={{ margin: 0 }}>Students</Title>
           <Text type="secondary">{students.length} registered across {classes.length} classes</Text>
         </div>
-        <Button type="primary" icon={<PlusOutlined />} onClick={openAdd}>Add student</Button>
+        <Button type="primary" icon={<PlusOutlined />} onClick={openAdd} block={isMobile}>Add student</Button>
       </div>
 
       {/* Stats */}
-      <RowCards students={students} />
+      <RowCards students={students} isMobile={isMobile} />
 
       {/* Filters */}
-      <div style={{ display: "flex", gap: 12, marginBottom: 16, alignItems: "center" }}>
+      <div style={{ display: "flex", gap: 12, marginBottom: 16, alignItems: "center", flexDirection: isMobile ? "column" : "row" }}>
         <Select
           placeholder="Filter by class"
           allowClear
-          style={{ minWidth: 200 }}
+          style={isMobile ? { width: "100%" } : { minWidth: 200 }}
           value={classFilter}
           onChange={(v) => { setClassFilter(v); setTeacherFilter(null); }}
           options={[
@@ -247,7 +250,7 @@ export default function Students() {
         <Select
           placeholder="Filter by teacher"
           allowClear
-          style={{ minWidth: 200 }}
+          style={isMobile ? { width: "100%" } : { minWidth: 200 }}
           value={teacherFilter}
           onChange={(v) => { setTeacherFilter(v); setClassFilter(null); }}
           options={[
@@ -260,7 +263,7 @@ export default function Students() {
           placeholder="Search by name or class..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{ flex: 1, borderRadius: 8 }}
+          style={isMobile ? { flex: 1, width: "100%", borderRadius: 8 } : { flex: 1, borderRadius: 8 }}
           allowClear
         />
       </div>
@@ -273,6 +276,7 @@ export default function Students() {
           rowKey="_id"
           pagination={{ pageSize: 15, showSizeChanger: false }}
           size="middle"
+          scroll={{ x: "max-content" }}
         />
       </Card>
 
@@ -317,12 +321,12 @@ export default function Students() {
   );
 }
 
-function RowCards({ students }) {
+function RowCards({ students, isMobile }) {
   const atRisk = students.filter(s => s.discipline < 10).length;
   const goodStanding = students.filter(s => s.discipline >= 15).length;
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 16 }}>
+    <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)", gap: 12, marginBottom: 16 }}>
       {[
         { label: "Total students", val: students.length, color: "#4f46e5" },
         { label: "Good standing (>=15)", val: goodStanding, color: "#16a34a" },

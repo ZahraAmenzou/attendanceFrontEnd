@@ -81,7 +81,7 @@ export default function Subjects() {
 
   return (
     <div style={{ maxWidth: 720, margin: "0 auto" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20, gap: 12, flexWrap: "wrap" }}>
         <div>
           <Title level={4} style={{ margin: 0 }}>Subjects</Title>
           <Text type="secondary">{subjects.length} subjects</Text>
@@ -92,7 +92,7 @@ export default function Subjects() {
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         {subjects.map((s) => (
           <Card key={s._id} style={{ borderRadius: 10 }} hoverable>
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
               <div style={{
                 width: 44, height: 44, borderRadius: 10,
                 background: "#f0fdf4", display: "flex", alignItems: "center", justifyContent: "center",
@@ -100,7 +100,7 @@ export default function Subjects() {
               }}>
                 <BookOutlined style={{ color: "#16a34a", fontSize: 18 }} />
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
                 <Text strong style={{ fontSize: 15 }}>{s.name}</Text>
                 {s.code && (
                   <>
